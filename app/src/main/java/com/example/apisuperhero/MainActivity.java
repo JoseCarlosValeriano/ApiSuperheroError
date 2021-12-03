@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.apisuperhero.utils.NetworkUtils;
@@ -20,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
 
     TextView urlDisplay;
     TextView searchResults;
-
     TextView messageError;
 
+    ProgressBar Carga;
 
     public class SuperHeroQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -38,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return toysURL;
         }
+        protected void onPreExecute(){Carga.setVisibility(View.VISIBLE);}
 
         @Override
         protected void onPostExecute(String s){
+            Carga.setVisibility(View.INVISIBLE);
             if( s != null && !s.equals("")){
                 showJsonData();
                 searchResults.setText(s);
@@ -108,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         urlDisplay = (TextView) findViewById(R.id.url_display);
         searchResults = (TextView) findViewById(R.id.github_search_result);
         messageError = (TextView) findViewById(R.id.messageError_result);
+
+        Carga = (ProgressBar) findViewById(R.id.carga);
 
     }
 
