@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     TextView urlDisplay;
     TextView searchResults;
 
+    TextView messageError;
+
 
     public class SuperHeroQueryTask extends AsyncTask<URL, Void, String> {
 
@@ -40,10 +42,25 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
             if( s != null && !s.equals("")){
+                showJsonData();
                 searchResults.setText(s);
+            }else{
+                showErrorMessage();
             }
         }
     }
+
+    private void showJsonData(){
+        messageError.setVisibility(View.INVISIBLE);
+        searchResults.setVisibility(View.VISIBLE);
+    }
+
+    private void showErrorMessage(){
+        searchResults.setVisibility(View.INVISIBLE);
+        messageError.setVisibility(View.VISIBLE);
+    }
+
+
 
 
     @Override
@@ -51,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main,menu);
         return true;
     }
+
+
 
 
     @Override
@@ -88,6 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
         urlDisplay = (TextView) findViewById(R.id.url_display);
         searchResults = (TextView) findViewById(R.id.github_search_result);
+        messageError = (TextView) findViewById(R.id.messageError_result);
 
     }
+
+
+
+
 }

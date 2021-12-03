@@ -2,4 +2,5 @@
     <string name="app_name">ApiSuperhero</string>
     <string name="Launcher">Launcher</string>
     <string name="Clear">Clear</string>
+    <string name="Err">Se ha producido un error, La API es erronea o la API esta vacia</string>
 </resources>
